@@ -1,13 +1,24 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ListSuggestionComponent } from './core/list-suggestion/list-suggestion.component';
+import { ListSuggestionComponent } from './features/suggestions/list-suggestion/list-suggestion.component';
 import { HomeComponent } from './core/home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'list', pathMatch: 'full' },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'list', component: ListSuggestionComponent },
+  {
+    path: 'suggestions',
+    loadChildren: () =>
+      import('./features/suggestions/suggestions.module').then(
+        (m) => m.SuggestionsModule,
+      ),
+  },
+  {
+    path: 'user',
+    loadChildren: () =>
+      import('./features/users/users.module').then((m) => m.UsersModule),
+  },
   { path: '**', component: NotFoundComponent },
 ];
 
