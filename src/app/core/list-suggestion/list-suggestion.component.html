@@ -1,0 +1,46 @@
+<div class="container">
+    <input type="text" name="" id="" style="width: 600px;margin-bottom: 30px;margin-top: 50px;" placeholder="search by title or category" [(ngModel)]="serchItem">
+  {{serchItem}}
+    <div class="row">
+    <div class="col-md-auto">
+      <div
+        class="card"
+        *ngFor="let sugg of filter()"
+        style="margin-bottom: 20px"
+      >
+        <div class="card-header">
+          <!-- interpolation -->
+          {{ sugg.title }}
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{ sugg.category }} -- {{ sugg.date }}</h5>
+          <p class="card-text">{{ sugg.description }}</p>
+          <h3>{{ sugg.status }}</h3>
+          <button
+            type="button"
+            class="btn btn-primary"
+            *ngIf="sugg.status == 'acceptee'"
+            (click)="like(sugg)"
+          >
+            Likes-{{ sugg.nbLikes }}
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            *ngIf="sugg.status == 'acceptee'"
+            (click)="addToFavorites(sugg)"
+          >
+            Add to favorites
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <h3>Liste des favories</h3>
+      <ul *ngFor="let favorie of listFavories">
+        <li>{{favorie.title}}</li>
+      </ul>
+    </div>
+  </div>
+</div>
