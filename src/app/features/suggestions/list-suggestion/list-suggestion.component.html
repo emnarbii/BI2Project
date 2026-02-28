@@ -1,7 +1,15 @@
 <div class="container">
-    <input type="text" name="" id="" style="width: 600px;margin-bottom: 30px;margin-top: 50px;" placeholder="search by title or category" [(ngModel)]="serchItem">
-  {{serchItem}}
-    <div class="row">
+  <input
+    type="text"
+    name=""
+    id=""
+    style="width: 600px; margin-bottom: 30px; margin-top: 50px"
+    placeholder="search by title or category"
+    [(ngModel)]="serchItem"
+  />
+  <div class="row">
+    <a routerLink="/suggestions/add" class="btn btn-primary">add new</a>
+
     <div class="col-md-auto">
       <div
         class="card"
@@ -10,10 +18,10 @@
       >
         <div class="card-header">
           <!-- interpolation -->
-          {{ sugg.title }}
+          {{ sugg.title |uppercase}}
         </div>
         <div class="card-body">
-          <h5 class="card-title">{{ sugg.category }} -- {{ sugg.date }}</h5>
+          <h5 class="card-title">{{ sugg.category }} -- {{ sugg.date|date }}</h5>
           <p class="card-text">{{ sugg.description }}</p>
           <h3>{{ sugg.status }}</h3>
           <button
@@ -32,6 +40,7 @@
           >
             Add to favorites
           </button>
+          <a class="btn btn-primary" [routerLink]="['/suggestions',sugg.id]">Details</a>
         </div>
       </div>
     </div>
@@ -39,7 +48,7 @@
     <div class="col">
       <h3>Liste des favories</h3>
       <ul *ngFor="let favorie of listFavories">
-        <li>{{favorie.title}}</li>
+        <li>{{ favorie.title }}</li>
       </ul>
     </div>
   </div>

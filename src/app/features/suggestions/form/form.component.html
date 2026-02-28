@@ -1,0 +1,79 @@
+<p>form works!</p>
+
+<div class="container">
+  <form [formGroup]="suggestionForm">
+    <div class="mb-3">
+      <label class="form-label">Title</label>
+      <input type="text" class="form-control" formControlName="title" />
+    </div>
+    <div *ngIf="title?.touched && title?.invalid">
+      <span
+        *ngIf="suggestionForm.get('title')?.errors?.['required']"
+        style="color: red"
+        >this field is required</span
+      >
+      <span
+        *ngIf="suggestionForm.get('title')?.errors?.['minlength']"
+        style="color: red"
+        >at least 5 caracters</span
+      >
+      <br />
+      <span
+        *ngIf="suggestionForm.get('title')?.errors?.['pattern']"
+        style="color: red"
+        >respect the pattern</span
+      >
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Description</label>
+      <input type="text" class="form-control" formControlName="description" />
+    </div>
+
+    <div
+      *ngIf="
+        suggestionForm.get('description')?.touched &&
+        suggestionForm.get('description')?.invalid
+      "
+    >
+      <span
+        *ngIf="suggestionForm.get('description')?.errors?.['required']"
+        style="color: red"
+        >this field is required</span
+      >
+      <span
+        *ngIf="suggestionForm.get('description')?.errors?.['minlength']"
+        style="color: red"
+        >at least 30 caracters</span
+      >
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Category</label>
+      <select class="form-select" formControlName="category">
+        <option>----- select-------</option>
+      </select>
+    </div>
+    <div *ngIf="category?.touched && category?.invalid">
+      <span
+        *ngIf="suggestionForm.get('category')?.errors?.['required']"
+        style="color: red"
+        >this field is required</span
+      >
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Date</label>
+      <input type="text" class="form-control" formControlName="date" readonly />
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Status</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="status"
+        readonly
+      />
+    </div>
+    <button type="submit" class="btn btn-primary" (click)="afficher()" [disabled]="suggestionForm.invalid">
+      Save
+    </button>
+  </form>
+</div>
